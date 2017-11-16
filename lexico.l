@@ -1,29 +1,30 @@
 %{
 	#include <stdio.h>
+	#include <stdlib.h>
 	#include "sintactico.tab.h"
 	int linea = 1;
 	int yylex();
 %}
-number 		[0-9]*
-letter 		[a-z]*
-empty 		[ ]*
-parentesis	[\(|\)]
-list 		[']*
+NUMBER 		[0-9]*
+LETTER 		[a-z]*
+EMPTY 		[ ]*
+PARENTESIS	[\(|\)]
+LIST 		[']*
 %%
-{number} 		{ECHO;}
-{empty} 		{/*omitir*/}
-{letter} 		{ECHO;}
-"+"			{printf("OperadorSuma");}
-"-"			{printf("OperadorResta");}
-"*"			{printf("OperadorMulti");}
-"/"			{printf("OperadorDiv");}
+{NUMBER} 		{yylval.real=atoi(yytext);return(NUMBER);}
+{EMPTY} 		{/*omitir*/}
+{LETTER} 		{ECHO;}
+"+"				{return(MAS);}
+"-"				{return(MENOS);}
+"*"				{return(MULT);}
+"/"				{return(DIV);}
 "'" 			{printf("Lista");}
 "\n"			{printf("\n");linea++;}
-{parentesis}	{printf("Parentesis");}
-. 				{printf("\nERROR Lexico: <<"); ECHO; printf(">> ");
-				 printf("lin: %i", linea);}
+{PARENTESIS}	{printf("Parentesis");}
+. 				{printf("ERROR Lexico: <<"); ECHO; printf(">> ");
+				 printf("lin: %i\t", linea);}
 %%
-main(){
+/*main(){
 	yyin = fopen("prueba.txt","r");
 	yylex();
-}
+}*/

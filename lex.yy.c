@@ -471,10 +471,11 @@ char *yytext;
 #line 1 "lexico.l"
 #line 2 "lexico.l"
 	#include <stdio.h>
-	//#include "sintactico.tab.h"
+	#include <stdlib.h>
+	#include "sintactico.tab.h"
 	int linea = 1;
 	int yylex();
-#line 478 "lex.yy.c"
+#line 479 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -692,9 +693,9 @@ YY_DECL
 		}
 
 	{
-#line 12 "lexico.l"
+#line 13 "lexico.l"
 
-#line 698 "lex.yy.c"
+#line 699 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -753,67 +754,67 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 13 "lexico.l"
-{ECHO;}
+#line 14 "lexico.l"
+{yylval.real=atoi(yytext);return(NUMBER);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 14 "lexico.l"
+#line 15 "lexico.l"
 {/*omitir*/}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "lexico.l"
+#line 16 "lexico.l"
 {ECHO;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 16 "lexico.l"
-{printf("OperadorSuma");}
+#line 17 "lexico.l"
+{return(MAS);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 17 "lexico.l"
-{printf("OperadorResta");}
+#line 18 "lexico.l"
+{return(MENOS);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 18 "lexico.l"
-{printf("OperadorMulti");}
+#line 19 "lexico.l"
+{return(MULT);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 19 "lexico.l"
-{printf("OperadorDiv");}
+#line 20 "lexico.l"
+{return(DIV);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 20 "lexico.l"
+#line 21 "lexico.l"
 {printf("Lista");}
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 21 "lexico.l"
+#line 22 "lexico.l"
 {printf("\n");linea++;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "lexico.l"
+#line 23 "lexico.l"
 {printf("Parentesis");}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "lexico.l"
-{printf("\nERROR Lexico: <<"); ECHO; printf(">> ");
-				 printf("lin: %i", linea);}
+#line 24 "lexico.l"
+{printf("ERROR Lexico: <<"); ECHO; printf(">> ");
+				 printf("lin: %i\t", linea);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 25 "lexico.l"
+#line 26 "lexico.l"
 ECHO;
 	YY_BREAK
-#line 817 "lex.yy.c"
+#line 818 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1814,10 +1815,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 25 "lexico.l"
+#line 26 "lexico.l"
 
 
-main(){
+/*main(){
 	yyin = fopen("prueba.txt","r");
 	yylex();
-}
+}*/
